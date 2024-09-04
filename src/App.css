@@ -1,38 +1,52 @@
+/* App.css */
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  min-height: 100vh; /* Ensure the app takes up the full viewport height */
 }
 
-.App-link {
-  color: #61dafb;
+.content {
+  flex: 1; /* Allow the content to expand and push the footer to the bottom */
+  width: 100%; /* Ensure content spans the full width of the viewport */
+  box-sizing: border-box; /* Include padding in the width calculation */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.footer-text {
+  font-size: 14px;
+  color: #333; /* Dark text color */
+  margin: 0; /* Remove any default margin */
+}
+
+.contact-button {
+  padding: 8px 16px; /* Adjust padding to fit the footer */
+  border: none;
+  border-radius: 20px; /* Rounded button */
+  background-color: #e992ca; /* Pink background color */
+  color: #2c1111; /* Dark text color */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+  background-color: #d881b2; /* Slightly darker pink on hover */
+}
+
+/* Body Styling */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('./img/background.jpeg'); /* Path to your background image */
+  background-size: cover; /* Ensure the image covers the entire viewport */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-attachment: fixed; /* Fix the image in place */
+  color: #333; /* Default text color for visibility */
+}
+
+.main-text {
+  margin-top: 150px;
+  margin-bottom: -30px;
 }

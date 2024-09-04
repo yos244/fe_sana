@@ -1,0 +1,37 @@
+.footer {
+    background-color: #f2f2f2; /* Light gray background */
+    border-top-left-radius: 20px; /* Rounded top-left corner */
+    border-top-right-radius: 20px; /* Rounded top-right corner */
+    display: flex;
+    justify-content: space-between; /* Space between the text and button */
+    align-items: center; /* Center items vertically */
+    box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow on top edge */
+    width: calc(100% - 40px); /* Adjust width to match navbar's inner width */
+    max-width: 1150px; /* Match max-width of the navbar */
+    margin: 0 auto; /* Center the footer horizontally */
+    height: 60px; /* Set the height of the footer */
+    margin-top: 30px; /* Push the footer to the bottom */
+    padding: 0 20px; /* Add padding to create space between content and edges */
+    box-sizing: border-box; /* Include padding in the width calculation */
+  }
+  
+  .footer-text {
+    font-size: 14px;
+    color: #333; /* Dark text color */
+    margin: 0; /* Remove any default margin */
+  }
+  
+  .contact-button {
+    padding: 8px 16px; /* Adjust padding to fit the footer */
+    border: none;
+    border-radius: 20px; /* Rounded button */
+    background-color: #e992ca; /* Pink background color */
+    color: #2c1111; /* Dark text color */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .contact-button:hover {
+    background-color: #d881b2; /* Slightly darker pink on hover */
+  }
+  
