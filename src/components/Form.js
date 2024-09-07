@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import './Form.css'; // Add your custom styles here
 
-const Form = () => {
-  const [itemName, setItemName] = useState('');
+const Form = ({ onCardAdded }) => {
+  const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
-  const [img_url, setImg_url] = useState(''); // Changed to img_url
+  const [img_url, setImg_url] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const newCard = {
-      itemName,
+      title,
       description,
-      price: parseFloat(price), // Ensure price is a number
-      img_url, // Changed to img_url
+      price: parseFloat(price),
+      img_url,
     };
 
-    // POST request to backend API
     fetch('http://localhost:5038/api/store_db/cards', {
       method: 'POST',
       headers: {
@@ -29,10 +28,11 @@ const Form = () => {
       .then((response) => {
         if (response.ok) {
           setSuccessMessage('Card added successfully!');
-          setItemName('');
+          setTitle('');
           setDescription('');
           setPrice('');
-          setImg_url(''); // Reset img_url
+          setImg_url('');
+          onCardAdded(); // Notify parent component to refresh
         } else {
           setSuccessMessage('Error adding card. Please try again.');
         }
@@ -48,12 +48,12 @@ const Form = () => {
       <h2>Add a New Card</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="itemName">Item Title:</label>
+          <label htmlFor="title">Item Title:</label>
           <input
             type="text"
-            id="itemName"
-            value={itemName}
-            onChange={(e) => setItemName(e.target.value)}
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             required
           />
         </div>
@@ -84,8 +84,8 @@ const Form = () => {
           <input
             type="text"
             id="img_url"
-            value={img_url} // Changed to img_url
-            onChange={(e) => setImg_url(e.target.value)} // Changed to setImg_url
+            value={img_url}
+            onChange={(e) => setImg_url(e.target.value)}
             required
           />
         </div>
