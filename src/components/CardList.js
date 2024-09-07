@@ -1,34 +1,28 @@
-// CardList.js
-import React from 'react';
-import Card from './Card';
-import './CardList.css';
+import React, { useState, useEffect } from 'react';
+import './CardList.css'; // Import your CSS file
 
-import img1 from '../img/1.jpeg';
-import img2 from '../img/2.jpeg';
-import img3 from '../img/3.jpeg';
-import img4 from '../img/4.jpeg';
-import img5 from '../img/5.jpeg';
-import img6 from '../img/6.jpeg';
 
 const CardList = () => {
-  const items = [
-    { id: 1, imageUrl: img1, itemName: 'Item 1', price: '$10' },
-    { id: 2, imageUrl: img2, itemName: 'Item 2', price: '$20' },
-    { id: 3, imageUrl: img3, itemName: 'Item 3', price: '$30' },
-    { id: 4, imageUrl: img4, itemName: 'Item 4', price: '$40' },
-    { id: 5, imageUrl: img5, itemName: 'Item 5', price: '$50' },
-    { id: 6, imageUrl: img6, itemName: 'Item 6', price: '$60' },
-  ];
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5038/api/store_db/cards') // Fetch from backend API
+      .then(response => response.json())
+      .then(data => {
+        console.log('Fetched cards:', data); // For debugging
+        setCards(data);
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
 
   return (
-    <div className="card-list-container">
-      {items.map(item => (
-        <Card
-          key={item.id}
-          imageUrl={item.imageUrl}
-          itemName={item.itemName}
-          price={item.price}
-        />
+    <div className="card-list">
+      {cards.map(card => (
+        <div key={card._id} className="card">
+          <img src={card.imageUrl} alt={card.itemName} />
+          <h2>{card.title}</h2>
+          <p>SYP {card.price}</p>
+        </div>
       ))}
     </div>
   );

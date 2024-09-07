@@ -1,9 +1,9 @@
-// App.js
 import React from 'react';
 import './App.css';
-import Navbar from './components/Navbar'; // Ensure Navbar component is imported
-import CardList from './components/CardList'; // Ensure CardList component is imported
+import Navbar from './components/Navbar';
+import CardList from './components/CardList';
 import Footer from './components/Footer';
+import Form from './components/Form.js';
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
       <div className="content">
         <h1 className='main-text'>Store Items</h1>
         <CardList />
+        <Form />
         <Footer />
       </div>
     </div>
