@@ -13,7 +13,7 @@
   margin: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  position: relative; /* Position relative for delete button positioning */
   overflow: hidden; /* Hide any overflow */
 }
 
@@ -35,8 +35,68 @@
   object-fit: contain; /* Fit the image inside the container without cropping */
 }
 
+.card-content {
+  flex: 1; /* Take up available space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .card:hover {
   background-color: #e8c0e4; /* Slightly lighter background color */
   transform: translateY(-5px); /* Move the card up slightly */
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15); /* Increase the shadow for depth effect */
+}
+
+.delete-btn {
+  background-color: #e0c5c5;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  width: 40px; /* Fixed width for delete button */
+  height: 40px; /* Fixed height for delete button */
+  position: absolute; /* Position the delete button at the top */
+  top: 10px; /* Space from the top of the card */
+  right: 10px; /* Space from the right of the card */
+  z-index: 999; /* Ensure it is above other content */
+}
+
+.show-more-btn {
+  background-color: #e0c5c5;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-right: 65%;
+}
+
+.show-more-btn:hover {
+  background-color: #ac5bd5;
+}
+
+.description-container {
+  position: relative;
+}
+
+.description {
+  display: none; /* Hide by default */
+  margin-top: 10px;
+  transition: max-height 0.3s ease-out;
+  max-height: 0; /* Ensure the content is not visible */
+  overflow: hidden;
+}
+
+.description.expanded {
+  display: block; /* Show when expanded */
+  max-height: 1000px; /* Arbitrarily large to accommodate content */
+}
+
+.description.collapsed {
+  display: none; /* Ensure it is hidden */
 }
