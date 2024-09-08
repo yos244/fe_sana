@@ -1,100 +1,84 @@
 import React, { useState } from 'react';
-import './Form.css'; // Add your custom styles here
 
-const Form = ({ onCardAdded }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
-  const [img_url, setImg_url] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+const Form = () => {
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('');
+    const [imageFile, setImageFile] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-    const newCard = {
-      title,
-      description,
-      price: parseFloat(price),
-      img_url,
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('price', price);
+        formData.append('image', imageFile);
+
+        try {
+            setLoading(true); // Start loading indicator
+
+            const response = await fetch('http://localhost:5038/api/store_db/cards', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+            // Handle success (e.g., display success message)
+        } catch (error) {
+            console.error('Error:', error);
+
+            // Handle error (e.g., display error message)
+        } finally {
+            setLoading(false); // Stop loading indicator
+            window.location.reload(); // Refresh the page after submission
+        }
     };
 
-    fetch('http://localhost:5038/api/store_db/cards', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newCard),
-    })
-      .then((response) => {
-        if (response.ok) {
-          setSuccessMessage('Card added successfully!');
-          setTitle('');
-          setDescription('');
-          setPrice('');
-          setImg_url('');
-          onCardAdded(); // Notify parent component to refresh
-        } else {
-          setSuccessMessage('Error adding card. Please try again.');
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        setSuccessMessage('Error adding card. Please try again.');
-      });
-  };
-
-  return (
-    <div className="form-container">
-      <h2>Add a New Card</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="title">Item Title:</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="description">Description:</label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="price">Price:</label>
-          <input
-            type="number"
-            id="price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="img_url">Image URL:</label>
-          <input
-            type="text"
-            id="img_url"
-            value={img_url}
-            onChange={(e) => setImg_url(e.target.value)}
-            required
-          />
-        </div>
-
-        <button type="submit">Submit</button>
-      </form>
-      {successMessage && <p>{successMessage}</p>}
-    </div>
-  );
+    return (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label>Title:</label>
+                <input
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                />
+            </div>
+            <div>
+                <label>Description:</label>
+                <textarea
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
+                />
+            </div>
+            <div>
+                <label>Price:</label>
+                <input
+                    type="number"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    required
+                />
+            </div>
+            <div>
+                <label>Image:</label>
+                <input
+                    type="file"
+                    onChange={(e) => setImageFile(e.target.files[0])}
+                    required
+                />
+            </div>
+            <button type="submit" disabled={loading}>
+                {loading ? 'Uploading...' : 'Submit'}
+            </button>
+        </form>
+    );
 };
 
 export default Form;

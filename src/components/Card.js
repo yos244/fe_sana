@@ -5,7 +5,7 @@ import './Card.css';
 const Card = ({ imageUrl, itemName, price }) => (
   <div className="card">
     <div
-      className="card-image"
+      className="img"
       style={{ backgroundImage: `url(${imageUrl})` }}
     ></div>
     <div className="card-content">

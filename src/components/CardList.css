@@ -1,76 +1,42 @@
-.card-list-wrapper {
-  display: flex;
-  justify-content: center; /* Center the grid horizontally */
-  width: 100%; /* Full width of the viewport */
-  padding-top: 20px; /* Space between navbar and cards */
-  box-sizing: border-box; /* Include padding in the width calculation */
-}
-
-.card-list-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid with minimum 300px per card */
-  gap: 20px; /* Space between cards */
-  padding: 20px; /* Padding inside the grid container */
-  max-width: 1200px; /* Maximum width of the grid container */
-  box-sizing: border-box; /* Include padding in the width calculation */
-  width: 100%; /* Ensure container spans full width */
-  margin: 0 auto; /* Center grid container horizontally */
-}
+/* CardList.css */
 
 .card {
-  background-color: #ffffff; /* White background */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, transform 0.3s ease;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   cursor: pointer;
-  width: 300px; /* Fixed width */
-  height: 400px; /* Fixed height */
-  margin-left: 20px;
-  margin-top: 100px;
-}
-
-.card:hover {
-  background-color: #f0f0f0; /* Slightly darker background on hover */
-  transform: translateY(-5px); /* Lift the card slightly on hover */
-}
-
-.card-content {
+  width: 100%; /* Card takes full width of container */
+  max-width: 400px; /* Maximum width of 400px */
+  margin: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 100%; /* Make sure content fits within the card */
-  justify-content: space-between; /* Space content evenly within the card */
+  justify-content: center;
+  overflow: hidden; /* Hide any overflow */
 }
 
-.card-image {
-  width: 100%;
-  height: 1800px; /* Adjusted height for image placeholder */
-  background-color: #e0e0e0; /* Placeholder background for image */
-  margin-bottom: 15px;
+.img-container {
+  width: 100%; /* Full width of the card */
+  height: 250px; /* Fixed height for the image container */
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
-  color: #999; /* Light gray text color for placeholder */
+  overflow: hidden; /* Hide any overflow */
+  margin-bottom: 10px; /* Space below the image */
 }
 
-h3 {
-  margin: 10px 0;
-  color: #333;
+.img, .image {
+  max-width: 100%; /* Ensure the image does not exceed container width */
+  max-height: 300px; /* Ensure the image does not exceed container height */
+  height: auto; /* Maintain aspect ratio */
+  width: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Fit the image inside the container without cropping */
 }
 
-p {
-  margin: 5px 0;
-  color: #555;
-}
-
-.card-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
-  gap: 20px; /* Space between cards */
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto; /* Center the grid container */
+.card:hover {
+  background-color: #e8c0e4; /* Slightly lighter background color */
+  transform: translateY(-5px); /* Move the card up slightly */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15); /* Increase the shadow for depth effect */
 }
